@@ -22,10 +22,12 @@ The foundation of C++ OOP is the relationship between **classes and objects**.
 A class is a **user-defined type** that describes the data and operations associated with objects of that type. (or) A class defines a user-defined type from which objects can be created.
 
 basic syntax:
+```cpp
     class ClassName
     {
         // members
     };
+```
 
 For example, a student can be represented using:
 - Roll number
@@ -53,6 +55,7 @@ Each object has its own non-static data members.
 
 Conceptually :
 
+```
 s1
 +----------------+
 | roll = 101     |
@@ -73,6 +76,7 @@ s3
 | name           |
 | marks          |
 +----------------+
+```
 
 ---
 
@@ -119,7 +123,8 @@ Members declared under **private:** cannot be directly accessed from outside the
 allows class members (variables and functions) to be accessed within the defining class and its derived (child) classes, while blocking direct access from outside the class hierarchy. It acts as a middle ground between public (accessible anywhere) and private (accessible only within the exact same class).
 
 basic syntax :
-    keyword followed by a colon (:)
+```cpp
+    //keyword followed by a colon (:)
     class class_name {
     public:
         //members
@@ -132,6 +137,7 @@ basic syntax :
     protected:
         //members
     }
+```
 
 Members of a class are private by default.
 
@@ -149,6 +155,7 @@ Each object has its own non-static data, while ordinary non-static member-functi
 
 simplified conceptual representation :
 
+```
               OBJECT STORAGE
 
         s1                         s2
@@ -169,11 +176,12 @@ simplified conceptual representation :
         |                           |
         | Machine instructions      |
         +---------------------------+
+```
 
 ## 11. Class Vs Struct
 
 **`class` and `struct` have essentially the same capabilities; their important default differences are member access and base-class access.**
 
-Default Member Access: class members are private by default; struct members are public by default.
+**Default Member Access :** class members are private by default; struct members are public by default.
 
-Default Inheritance: class inherits privately by default; struct inherits publicly by default.
+**Default Inheritance :** class inherits privately by default; struct inherits publicly by default.
