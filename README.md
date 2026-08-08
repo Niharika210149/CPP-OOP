@@ -11,3 +11,7 @@
 - [ ] Inheritance
 - [ ] Polymorphism
 - [ ] Abstraction
+
+## Git Learning
+
+This repository is managed using Git.
