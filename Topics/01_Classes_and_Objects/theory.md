@@ -145,7 +145,9 @@ Members of a class are private by default.
 
 ## 9. This Pointer 
 
-The **this** pointer identifies the current object inside a non-static member function.
+The ```this``` pointer is a special pointer available inside a non-static member function.
+
+It points to the object for which the member function was invoked.
 
 ---
 
@@ -185,3 +187,100 @@ simplified conceptual representation :
 **Default Member Access :** class members are private by default; struct members are public by default.
 
 **Default Inheritance :** class inherits privately by default; struct inherits publicly by default.
+
+---
+
+## 12. Object size
+
+- Represents the total size of an object in bytes.
+- Always measured using the ```sizeof``` operator.
+- Includes the sizes of all non-static data members plus any hidden padding bytes.
+
+syntax : ```cpp sizeof()```
+
+---
+
+## 13. Memory layout 
+
+memory layout defines exactly how data members, padding, and hidden pointers are arranged within those bytes.
+
+---
+
+## 14. Alignment 
+
+Alignment is a requirement concerning the addresses at which objects of a particular type can be stored.
+
+For example, if a type requires 4-byte alignment, suitable addresses may be:
+    ```1000
+       1004
+       1008
+       1012```
+
+The compiler can insert padding so that a member begins at an appropriately aligned address.
+
+Alignment requirements are implementation-dependent.
+
+---
+
+## 15. Padding
+
+Padding is unused space inserted by the implementation between or after data members to satisfy alignment requirements.
+
+A typical layout on a system where ```int``` requires 4-byte alignment is:
+```
+Offset
+0       +---------+
+        | char a  | 1 byte
+        +---------+
+1       | padding | 1 byte
+2       | padding | 1 byte
+3       | padding | 1 byte
+        +---------+
+4       |         |
+        |  int x  | 4 bytes
+        |         |
+        +---------+
+8       | char b  | 1 byte
+        +---------+
+9       | padding | 1 byte
+10      | padding | 1 byte
+11      | padding | 1 byte
+        +---------+
+
+Total = 12 bytes
+```
+
+---
+
+## 16. Tail Padding
+
+Padding can also occur at the end of an object. This is called tail padding.
+
+layout :
+```
+Offset
+0       +---------+
+        |         |
+        |  int x  | 4 bytes
+        |         |
+        +---------+
+4       | char a  | 1 byte
+        +---------+
+5       | char b  | 1 byte
+        +---------+
+6       | padding | 1 byte
+7       | padding | 1 byte
+        +---------+
+
+Total = 8 bytes
+```
+Tail padding helps ensure that objects placed consecutively, such as elements of an array, satisfy the appropriate alignment requirements.
+
+The ordering of data members can affect the amount of padding and consequently the size of an object.
+
+---
+
+- Ordinary non-static member-function code is generally shared rather than duplicated in each object.
+- An empty class typically has a size of 1 byte.
+- A static data member belongs to the class, not to each individual object.
+- Static data-member storage is not included in the storage of each object.
