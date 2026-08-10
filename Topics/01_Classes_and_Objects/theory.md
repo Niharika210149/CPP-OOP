@@ -196,7 +196,10 @@ simplified conceptual representation :
 - Always measured using the ```sizeof``` operator.
 - Includes the sizes of all non-static data members plus any hidden padding bytes.
 
-syntax : ```cpp sizeof()```
+syntax : 
+```cpp 
+sizeof()
+```
 
 ---
 
