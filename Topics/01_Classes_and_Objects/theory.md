@@ -103,7 +103,7 @@ This combination of state and behavior is one of the fundamental ideas behind ob
 
 ## 7. Accessing Members
 
-The dot operator **(.)** is used to access members of an object.
+The dot operator **`.`** is used to access members of an object.
 A member function can also be called using the dot operator.
 
 ---
@@ -112,11 +112,11 @@ A member function can also be called using the dot operator.
 
 ### Public :
 
-Members declared under **public:** can be accessed from outside the class, subject to the usual language rules.
+Members declared under **`public:`** can be accessed from outside the class, subject to the usual language rules.
 
 ### Private :
 
-Members declared under **private:** cannot be directly accessed from outside the class.
+Members declared under **`private:`** cannot be directly accessed from outside the class.
 
 ### Protected :
 
@@ -145,7 +145,7 @@ Members of a class are private by default.
 
 ## 9. This Pointer 
 
-The ```this``` pointer is a special pointer available inside a non-static member function.
+The `this` pointer is a special pointer available inside a non-static member function.
 
 It points to the object for which the member function was invoked.
 
@@ -193,7 +193,7 @@ simplified conceptual representation :
 ## 12. Object size
 
 - Represents the total size of an object in bytes.
-- Always measured using the ```sizeof``` operator.
+- Always measured using the `sizeof` operator.
 - Includes the sizes of all non-static data members plus any hidden padding bytes.
 
 syntax : 
