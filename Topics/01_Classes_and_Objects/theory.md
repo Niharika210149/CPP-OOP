@@ -143,15 +143,7 @@ Members of a class are private by default.
 
 ---
 
-## 9. This Pointer 
-
-The `this` pointer is a special pointer available inside a non-static member function.
-
-It points to the object for which the member function was invoked.
-
----
-
-## 10. Simplified representation of object and memory storage 
+## 9. Simplified representation of object and memory storage 
 
 Each object has its own non-static data, while ordinary non-static member-function code is generally shared rather than duplicated inside each object.
 
@@ -180,7 +172,7 @@ simplified conceptual representation :
         +---------------------------+
 ```
 
-## 11. Class Vs Struct
+## 10. Class Vs Struct
 
 **`class` and `struct` have essentially the same capabilities; their important default differences are member access and base-class access.**
 
@@ -190,7 +182,7 @@ simplified conceptual representation :
 
 ---
 
-## 12. Object size
+## 11. Object size
 
 - Represents the total size of an object in bytes.
 - Always measured using the `sizeof` operator.
@@ -203,13 +195,13 @@ sizeof()
 
 ---
 
-## 13. Memory layout 
+## 12. Memory layout 
 
 memory layout defines exactly how data members, padding, and hidden pointers are arranged within those bytes.
 
 ---
 
-## 14. Alignment 
+## 13. Alignment 
 
 Alignment is a requirement concerning the addresses at which objects of a particular type can be stored.
 
@@ -225,7 +217,7 @@ Alignment requirements are implementation-dependent.
 
 ---
 
-## 15. Padding
+## 14. Padding
 
 Padding is unused space inserted by the implementation between or after data members to satisfy alignment requirements.
 
@@ -255,7 +247,7 @@ Total = 12 bytes
 
 ---
 
-## 16. Tail Padding
+## 15. Tail Padding
 
 Padding can also occur at the end of an object. This is called tail padding.
 
@@ -287,3 +279,12 @@ The ordering of data members can affect the amount of padding and consequently t
 - An empty class typically has a size of 1 byte.
 - A static data member belongs to the class, not to each individual object.
 - Static data-member storage is not included in the storage of each object.
+
+---
+
+## 16. This Pointer 
+
+The `this` pointer is a special pointer available inside a non-static member function.
+
+It points to the object for which the member function was invoked.
+
