@@ -51,6 +51,7 @@ basic syntax for creating an object :
     ClassName objectName;
 
 A class can be used to create any number of objects.
+
 Each object has its own non-static data members.
 
 Conceptually :
@@ -89,6 +90,7 @@ Variables declared inside a class are called data members or non-static data mem
 ## 5. Member Functions
 
 Functions declared inside a class are called member functions.
+
 A member function can operate on the object's data members.
 
 ---
@@ -104,6 +106,7 @@ This combination of state and behavior is one of the fundamental ideas behind ob
 ## 7. Accessing Members
 
 The dot operator **`.`** is used to access members of an object.
+
 A member function can also be called using the dot operator.
 
 ---
@@ -284,7 +287,185 @@ The ordering of data members can affect the amount of padding and consequently t
 
 ## 16. This Pointer 
 
-The `this` pointer is a special pointer available inside a non-static member function.
+The **`this`** pointer is a special pointer available inside a non-static member function.
 
 It points to the object for which the member function was invoked.
+
+Since `this` is a pointer to the current object, the `->` operator is used to access the object's members.
+
+syntax :
+```cpp
+this->roll
+```
+### `.` vs `->`
+
+The dot operator (`.`) is used with an object.
+
+The arrow operator (`->`) is used with a pointer to an object.
+
+```cpp
+Student s1;
+Student *ptr = &s1;
+
+s1.roll;       // object → .
+ptr->roll;     // pointer → ->
+```
+The expression:
+
+```cpp
+ptr->roll
+```
+
+is equivalent to:
+
+```cpp
+(*ptr).roll
+```
+
+Similarly:
+
+```cpp
+this->roll
+```
+
+is equivalent to:
+
+```cpp
+(*this).roll
+```
+
+because `this` is a pointer.
+
+A common use of `this` is resolving a conflict between a data member and a function parameter having the same name.
+
+A member function can return a reference to the current object.
+
+function calls can be chained :
+```cpp
+Student s1;
+
+s1.setRoll(101).setMarks(92.5f);
+```
+
+---
+
+## 17. `const` Member Functions
+
+A member function can be declared with `const` after its parameter list:
+
+```cpp
+void display() const
+{
+    std::cout << roll;
+}
+```
+
+The `const` qualifier means that the function promises not to modify the object's ordinary non-static state through the function.
+
+A `const` member function can be called on both:
+
+- non-const objects
+- const objects
+
+A const object cannot normally call a non-const member function because that function may modify the object.
+
+---
+
+## 17.1 `this` in a `const` Member Function
+
+Inside an ordinary non-const member function, the conceptual type of `this` is:
+
+```text
+Student*
+```
+
+Inside a `const` member function, the conceptual type is:
+
+```text
+const Student*
+```
+```text
+Student*
+    ↓
+pointer to a non-const Student
+
+const Student*
+    ↓
+pointer to a const Student
+```
+
+---
+
+## 17.2 `const Student*` vs `Student* const`
+
+These declarations are different:
+
+```cpp
+const Student* ptr;
+```
+
+means:
+
+> `ptr` is a pointer to a const `Student`.
+
+The object cannot be modified through `ptr`.
+
+Whereas:
+
+```cpp
+Student* const ptr = ...;
+```
+
+means:
+
+> `ptr` itself is a const pointer to a `Student`.
+
+The pointer cannot be changed to point somewhere else.
+
+---
+
+## 18. Const Member Function Access Rules
+
+The following combinations are possible:
+
+| Object | `display() const` | `setRoll()` |
+|---|---|---|
+| `Student` | Valid | Valid |
+| `const Student` | Valid | Invalid |
+
+Therefore:
+
+> A `const` member function can be called by both const and non-const objects, while a non-const member function cannot normally be called on a const object.
+
+---
+
+## 19. Key Takeaways
+
+### `this` Pointer
+
+1. `this` is a special pointer available inside a non-static member function.
+2. `this` points to the object for which the member function was invoked.
+3. `this` allows a member function to access the current object's members.
+4. `this->member` accesses a member through the current-object pointer.
+5. `this->member` is equivalent to `(*this).member`.
+6. The `.` operator is used with objects.
+7. The `->` operator is used with pointers to objects.
+8. `this` can resolve naming conflicts between data members and parameters.
+9. `*this` represents the current object.
+10. `return *this` can return a reference to the current object.
+11. Returning `*this` can enable member-function chaining.
+12. `return this` returns a pointer, while `return *this` can return the current object by the appropriate return type.
+
+### `const` Member Functions
+
+13. A member function can be declared `const` by placing `const` after its parameter list.
+14. A `const` member function promises not to modify the object's ordinary non-static state through the function.
+15. A `const` member function can be called on both const and non-const objects.
+16. A non-const member function cannot normally be called on a const object.
+17. Inside a `const` member function, the conceptual type of `this` is `const ClassName*`.
+18. A `const` member function can read ordinary data members but cannot normally modify them.
+19. `const Student*` means a pointer to a const `Student`; it is different from `Student* const`.
+20. `const` member functions are useful for functions that only observe the object's state.
+
+---
 
