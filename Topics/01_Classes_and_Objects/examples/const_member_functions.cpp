@@ -43,6 +43,9 @@ int main() {
 
     s1.display();
     s1.setRoll(10);
-    s1.display();
+    
+    s2.display();
+    // s2.setRoll(20); is invalid
+
     return 0;
 }
