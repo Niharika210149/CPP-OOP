@@ -107,6 +107,68 @@ s2 = s1;
 copy assignment operator
 ```
 
+---
+
+## Shallow Copy Vs Deep Copy
+
+### Shallow Copy
+
+A **shallow copy** is a copy in which each data member is copied as-is from the source object to the destination object.
+
+For pointer data members, the **pointer value (address)** is copied rather than the dynamically allocated object being copied.
+
+Example :
+
+```cpp
+class Student {
+private:
+    int roll;
+    int* marks;
+
+public:
+    Student(const Student& other)
+        : roll(other.roll), marks(other.marks)
+    {
+    }
+};
+```
+
+### Deep Copy
+
+A deep copy creates an independent copy of dynamically allocated or otherwise owned data instead of merely copying the pointer or resource handle.
+
+For a pointer data member, a deep copy creates new memory and copies the value stored in the source object's memory into the newly allocated memory.
+
+Example :
+```cpp
+class Student {
+private:
+    int roll;
+    int* marks;
+
+public:
+    Student(const Student& other)
+        : roll(other.roll), marks(new int(*other.marks))
+    {
+    }
+};
+```
+
+### The key distinction to remember
+
+```text
+Shallow copy
+    ↓
+copy the address
+
+Deep copy
+    ↓
+copy the data
+    ↓
+into NEW memory
+```
+
+---
 
 
 
