@@ -28,6 +28,16 @@ Constructors are invoked as part of object initialization.
 
 A constructor is primarily used to initialize an object into a valid starting state.
 
+Default Constructor :
+> A constructor that can be called with no arguments.
+
+example :
+```cpp
+Student()
+{
+}
+```
+
 ---
 
 ## Constructor initializer list
@@ -53,7 +63,7 @@ this initializes the members directly.
 
 Non-static data members are initialized in the order of their declaration in the class, regardless of the order in the constructor's member initializer list.
 
-A class can have multiple constructors.
+A class can have multiple constructors as long as their parameter lists differ.
 
 C++ chooses the appropriate constructor based on the arguments.
 
@@ -67,6 +77,37 @@ This is constructor overloading.
 
 > Reference data members :
 >> A reference data member must be bound to an existing object during initialization. A reference cannot first be created without referring to an object and then be made to refer to another object through assignment.
+
+---
+
+## Copy Constructor
+
+A copy constructor is a constructor that initializes an object from another object of the same class.
+
+When appropriate, C++ provides an implicitly-declared copy constructor.
+
+If a copy constructor is not user-declared, C++ may implicitly declare one, subject to the language's special-member-function rules.
+
+A typical form is:
+```cpp
+Student(const Student& other)
+{
+    // copy from other
+}
+```
+
+```
+Student s2 = s1;
+       ↓
+copy constructor
+
+Student s2;
+s2 = s1;
+       ↓
+copy assignment operator
+```
+
+
 
 
 
