@@ -42,7 +42,7 @@ Student()
 
 ## Constructor initializer list
 
-A constructor initializer list in C++ directly initializes class member variables before the constructor body executes.
+ A constructor initializer list in C++ directly initializes class member variables before the constructor body executes.
 
 directly initializes class member variables before the constructor body executes. 
 
@@ -115,7 +115,7 @@ copy assignment operator
 
 A **shallow copy** is a copy in which each data member is copied as-is from the source object to the destination object.
 
-For pointer data members, the **pointer value (address)** is copied rather than the dynamically allocated object being copied.
+For pointer data members that point to owned dynamically allocated resources, shallow copying copies the pointer value rather than creating an independent copy of the resource.
 
 Example :
 
@@ -169,6 +169,131 @@ into NEW memory
 ```
 
 ---
+
+## Destructor
+
+A destructor is a special member function that is automatically invoked when an object is destroyed.
+
+A destructor is commonly used to release resources owned by an object when the object's lifetime ends.
+
+Its syntax is:
+```cpp
+~Student()
+{
+}
+```
+
+- has the same name as the class preceded by ~
+- has no return type
+- takes no parameters
+- cannot be overloaded
+- is automatically called when the object is destroyed
+
+Example:
+```cpp
+class Student
+{
+public:
+    ~Student()
+    {
+        std::cout << "Destructor called\n";
+    }
+};
+```
+
+---
+
+## Copy Assignment
+
+a special member function used to copy the contents from one already existing object to another already existing object of the same class type.
+
+By default, the compiler provides an implicit copy assignment operator that performs a shallow copy. However, if your class manages resources dynamically (like raw pointers or file handles), you must write a custom copy assignment operator to achieve a deep copy and prevent issues like memory leaks or double-free errors.
+
+A typical copy assignment operator has the form:
+
+```cpp
+Student& operator=(const Student& other)
+{
+    if (this != &other)
+    {
+        // release current resource
+        // copy resource from other
+    }
+
+    return *this;
+}
+```
+
+---
+
+## Rule of Three
+
+The **Rule of Three** is a C++ guideline stating that if a class requires a user-defined destructor, copy constructor, or copy assignment operator to correctly manage a resource, it will generally require all three.
+
+The three special member functions are:
+
+1. Destructor
+2. Copy constructor
+3. Copy assignment operator
+
+The rule is particularly relevant to classes that manually manage resources such as dynamically allocated memory through raw pointers.
+
+These three operations correspond to three important situations:
+
+- **Destructor** → releases the resource when the object is destroyed.
+- **Copy constructor** → creates a new object with an independent copy of the resource.
+- **Copy assignment operator** → replaces the resource of an already existing object with an independent copy.
+
+Without appropriate implementations, copying a resource-owning class can result in problems such as:
+
+- shared ownership when independent ownership is intended
+- memory leaks
+- dangling pointers
+- double deletion
+
+The Rule of Three is a consequence of the relationship between resource ownership and the three operations above.
+
+example:
+```cpp
+class Student
+{
+private:
+    int* marks;
+
+public:
+
+    // Constructor
+    Student(int marks);
+
+    // Copy constructor
+    Student(const Student& other);
+
+    // Destructor
+    ~Student();
+};
+```
+```text
+           Student owns dynamic memory
+                       │
+          ┌────────────┼────────────┐
+          ↓            ↓            ↓
+     Constructor    Copy          Destructor
+                    Constructor
+          │            │            │
+       acquire      duplicate     release
+       resource      resource      resource
+                       │
+                       ↓
+                Copy Assignment
+                       │
+                       ↓
+                 replace resource
+```
+
+---
+
+
+
 
 
 
