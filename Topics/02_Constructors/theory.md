@@ -292,6 +292,25 @@ public:
 
 ---
 
+## Delegating Constructors
+
+A **delegating constructor** is a constructor that delegates the initialization of an object to another constructor of the same class.
+
+A delegating constructor uses another constructor's name in its member initializer list:
+
+```cpp
+Student()
+    : Student(0, 0.0f)
+{
+}
+
+The target constructor performs the member initialization and its constructor body executes first. After the target constructor completes, the body of the delegating constructor executes.
+
+A constructor that delegates to another constructor cannot also initialize individual data members or base classes in the same initializer list.
+
+Delegating constructors help avoid duplicated initialization logic by allowing one constructor to serve as the central initialization point.
+
+A constructor delegation cycle is not allowed. If constructors delegate to each other in a cycle, the program is ill-formed and the compiler diagnoses the cycle.
 
 
 
