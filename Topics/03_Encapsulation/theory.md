@@ -446,6 +446,64 @@ Destructor
 Release resource
 ```
 
+---
 
+## Encapsulation Design Principles
+
+- Step 1 — What does the object represent?
+
+For example:
+```cpp
+BankAccount
+Student
+Car
+File
+```
+
+- Step 2 — What is its internal state?
+
+For example:
+```cpp
+BankAccount
+    ↓
+balance
+```
+
+Keep implementation details private where appropriate.
+
+- Step 3 — What makes the object valid?
+
+For example:
+```cpp
+balance >= 0
+```
+
+That's your invariant.
+
+- Step 4 — How does a valid object get created?
+
+The constructor should establish the required initial state.
+
+- Step 5 — What operations should users be allowed to perform?
+
+Expose meaningful behavior.
+
+- Step 6 — What state should users be allowed to read?
+
+Provide public access where it makes sense.
+
+- Step 7 — What state should users be allowed to modify?
+
+Don't automatically provide setters. Control modification according to the object's rules.
+
+- Step 8 — What do derived classes need?
+
+Expose only what the inheritance hierarchy actually requires.
+
+- Step 9 — Does the object own resources?
+
+If yes, encapsulate the ownership and use RAII.
+
+**The goal is not simply to hide data, but to ensure that the class controls its state, validity, and behavior.**
 
 
