@@ -3,11 +3,9 @@
 
 ## Completed
 
-- [ ] Classes
-- [ ] Objects
-- [ ] Constructors
-- [ ] Destructors
-- [ ] Encapsulation
+- [✔] Classes & Objects
+- [✔] Constructors & Destructors
+- [✔] Encapsulation
 - [ ] Inheritance
 - [ ] Polymorphism
 - [ ] Abstraction
