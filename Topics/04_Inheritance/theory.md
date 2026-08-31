@@ -152,22 +152,24 @@ A public member inherited from `Animal` becomes private inside `Dog`, so `Puppy`
 
 Single inheritance occurs when one derived class inherits from one base class.
 
+Example 1:
+
 ```text
  Animal
    ↓
   Dog
 ```
 
-Each individual relationship is still a single-inheritance relationship:
+Example 2:
 
-```text
-Animal → Dog
-Animal → Cat
+```cpp
+class Parent { };
+class Child : public Parent { };
 ```
 
 ---
 
-## Multiple Inheritance
+## Multilevel Inheritance
 
 Multilevel inheritance occurs when a derived class becomes the base class for another derived class.
 
@@ -181,7 +183,7 @@ we have a chain:
 More Derived
 ```
 
-For example:
+Example 1:
 
 ```text
  Animal
@@ -199,4 +201,164 @@ For example:
 
 - `Dog` is the derived class of `Mammal`.
 
+Example 2:
+
+```cpp
+class Grandparent { };
+class Parent : public Grandparent { };
+class Child : public Parent { };
+```
+
 ---
+
+## Multiple Inheritance
+
+A single derived class inherits from two or more base classes simultaneously. 
+
+This allows the child class to combine features from multiple distinct sources.
+
+For example:
+
+```cpp
+class Mother { };
+class Father { };
+class Child : public Mother, public Father { };
+```
+
+### Ambiguity in Multiple Inheritance
+
+Ambiguity can occur in multiple inheritance when two or more base classes provide members with the same name.
+
+For example, if a derived class inherits from two base classes and both base classes contain a member function with the same name, a call to that function through the derived-class object may become ambiguous.
+
+The compiler cannot determine which base-class member should be used.
+
+> **Cause of Ambiguity**
+```text
+Base A
+   │
+   ├── start()
+   │
+   ↓
+Derived
+   ↑
+   │
+Base B
+   │
+   └── start()
+```
+The derived class has access to two different `start()` functions.
+
+> **Resolving Ambiguity**
+
+The ambiguity can be resolved by explicitly specifying the base class whose member should be used.
+
+The **scope resolution operator** `::` is used together with the base-class name to identify the required member.
+
+```text
+Derived object
+      ↓
+BaseA::member()
+      or
+BaseB::member()
+```
+
+> In multiple inheritance, if multiple base classes provide members with the same name, an unqualified reference to that member can be ambiguous. The ambiguity can be resolved by explicitly qualifying the member with the appropriate base-class name.
+
+---
+
+## Hierarchical Inheritance
+
+Multiple derived classes inherit from a single, shared base class. 
+
+This creates a tree-like structure where one general class splits into several specialized classes.
+
+Example 1:
+
+```text
+        Animal
+       /      \
+      ↓        ↓
+     Dog       Cat
+```
+
+Here:
+
+- `Animal` is the common base class.
+
+- `Dog` derives from `Animal`.
+
+- `Cat` derives from `Animal`.
+
+Both derived classes can use the appropriate accessible members inherited from `Animal`.
+
+---
+
+## Hybrid Inheritance
+
+Hybrid inheritance is a combination of two or more of the inheritance types listed above. 
+
+For instance, combining Hierarchical and Multiple inheritance creates a diamond shape.
+
+For example:
+
+```cpp
+class SharedBase { };
+class ParentA : public SharedBase { };
+class ParentB : public SharedBase { };
+class Child : public ParentA, public ParentB { }; 
+```
+
+### The Diamond Structure
+
+A particularly important form of hybrid inheritance is the **diamond-shaped inheritance** hierarchy.
+
+Consider:
+
+```text
+          A
+         / \
+        B   C
+         \ /
+          D
+```
+
+Here:
+
+- `A` is the common base class.
+
+- `B` derives from `A`.
+
+- `C` derives from `A`.
+
+- `D` derives from both `B` and `C`.
+
+> **diamond problem**
+
+The problem is that the same base class appears through multiple inheritance paths.
+
+There are two paths:
+
+```text
+D → B → A
+D → C → A
+```
+
+That shared base can create:
+
+- ambiguity
+
+- duplicate base-class state
+
+This is the key idea behind the diamond problem.
+
+> **How C++ solves the Diamond Problem**
+
+C++ provides **virtual inheritance** for this situation.
+
+The idea is to make `B` and `C` share a single common `A` base subobject rather than each having their own separate `A` subobject.
+
+`D` contains: one shared `A`
+
+---
+
