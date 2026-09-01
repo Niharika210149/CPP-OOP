@@ -362,3 +362,61 @@ The idea is to make `B` and `C` share a single common `A` base subobject rather 
 
 ---
 
+## Constructors and Destructors in Inheritance
+
+When inheritance is used, a derived object contains a base-class part as well as the derived-class part.
+
+Therefore, when a derived object is created or destroyed, C++ must initialize and destroy these parts in a specific order.
+
+### Constructor Order in Inheritance
+
+When an object of a derived class is created, the **base-class constructor executes before the derived-class constructor**.
+
+The base-class part of the object must be initialized before the derived-class part can be initialized.
+
+The general order is:
+
+```text
+Base constructor
+      ↓
+Derived constructor
+```
+
+> Why Does the Base Constructor Execute First?
+
+A derived object contains a base-class subobject.
+
+The derived-class portion depends on the base-class portion already being initialized.
+
+Conceptually:
+
+```text
+Dog object
+┌─────────────────────┐
+│ Animal base part    │
+├─────────────────────┤
+│ Dog derived part    │
+└─────────────────────┘
+```
+
+Therefore, C++ initializes the base-class part first and then initializes the derived-class part.
+
+> Base Constructor with Arguments
+
+If the base class has a constructor that requires arguments, the derived constructor must specify which base constructor should be called.
+
+The base constructor is initialized through the constructor initializer list.
+
+### Destructor Order in Inheritance
+
+Destruction occurs in the reverse order of construction.
+
+When a derived object is destroyed, the **derived-class destructor executes before the base-class destructor**.
+
+> Why Does Destruction Happen in Reverse Order?
+
+The derived-class portion of the object is destroyed first.
+
+Once the derived portion has been destroyed, the base-class portion can be destroyed.
+
+---
