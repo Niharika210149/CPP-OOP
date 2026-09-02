@@ -419,4 +419,54 @@ The derived-class portion of the object is destroyed first.
 
 Once the derived portion has been destroyed, the base-class portion can be destroyed.
 
+> For a derived class object, the construction process is conceptually:
+
+```text
+Base-class constructor
+        ↓
+Derived-class data members initialized
+        ↓
+Derived constructor body
+```
+
 ---
+
+## Virtual Destructor
+
+A **virtual destructor** is a base-class destructor declared with the `virtual` keyword.
+
+```cpp
+class Animal {
+public:
+    virtual ~Animal() {
+        std::cout << "Animal destroyed\n";
+    }
+};
+```
+
+- Its purpose is to ensure that when a derived object is destroyed through a base-class pointer, the correct destructor sequence occurs.
+
+- If the base destructor is not virtual, deleting a derived object through a base pointer results in undefined behavior.
+
+- A virtual destructor allows the derived destructor to run before the base destructor.
+
+```text
+Base pointer
+     │
+     ▼
+Derived object
+     │
+     │ delete
+     ▼
+Derived destructor
+     ↓
+Base destructor
+```
+
+> The **`override` specifier** tells the compiler that a derived-class member function is intended to override a virtual member function from its base class.
+
+> `= default` tells the compiler to generate the compiler-provided default implementation of a special member function.
+
+---
+
+
