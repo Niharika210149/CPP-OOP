@@ -469,4 +469,44 @@ Base destructor
 
 ---
 
+## Function Overriding
+
+Function overriding happens when a derived class provides its own version of a function that already exists in the base class.
+
+| Keyword |	Where? |	Meaning |
+| :----: | :----: | :----: |
+| `virtual` |	Base class | Allows a function to be overridden and participate in runtime polymorphism |
+| `override` |	Derived class | Tells the compiler to verify that the function overrides a base virtual function |
+| `= default` | Usually special member functions | Tells the compiler to generate the normal implementation |
+
+---
+
+## Polymorphism
+
+the ability of a single function, method, object, or operator to **take multiple forms and behave differently** depending on the input data or context.
+
+### Virtual Function
+
+A member function declared with virtual in a base class that can be overridden in derived classes and participate in runtime polymorphism.
+
+### Runtime Polymorphism
+
+**Runtime polymorphism** is a feature of object-oriented programming where the function to execute is determined **at runtime** based on the actual type of the object.
+
+In C++, runtime polymorphism is commonly achieved using:
+
+- Inheritance
+- Virtual functions
+- Function overriding
+- Base-class pointers or references
+
+> Runtime polymorphism allows a base-class pointer or reference to call the overridden function of the actual derived object at runtime.
+
+- **Dynamic Dispatch**
+
+Another term associated with runtime polymorphism is **dynamic dispatch**.
+
+Dynamic dispatch means that the appropriate overridden virtual function is selected at runtime.
+
+---
 
